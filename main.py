@@ -23,8 +23,8 @@ from api.user_api import VKUserAPI
 def build_handler():
     session = get_session()
 
-    group_client = VKClient(settings.VK_GROUP_TOKEN)
-    user_client = VKClient(settings.VK_USER_TOKEN)
+    group_client = VKClient(settings.VK_GROUP_TOKEN, settings.VK_API_VERSION)
+    user_client = VKClient(settings.VK_USER_TOKEN, settings.VK_API_VERSION)
 
     user_api = VKUserAPI(user_client)
     photo_api = VKPhotoAPI(user_client)
@@ -63,7 +63,7 @@ def main() -> None:
     settings.validate()
     init_db()
     handler = build_handler()
-    bot = VKBot(settings.VK_GROUP_TOKEN, handler)
+    bot = VKBot(settings.VK_GROUP_TOKEN, settings.VK_GROUP_ID, handler)
     bot.run()
 
 

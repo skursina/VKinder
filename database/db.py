@@ -17,15 +17,6 @@ class Base(DeclarativeBase):
 def build_db_url() -> URL:
     """
     Собирает строку подключения к PostgreSQL из settings.DB_CONFIG.
-
-    settings.DB_CONFIG в формате:
-    {
-        "host": "...",
-        "port": "...",
-        "database": "...",
-        "user": "...",
-        "password": "...",
-    }
     """
     settings.validate()
 
@@ -39,17 +30,7 @@ def build_db_url() -> URL:
     )
 
 
-engine2 = create_engine(build_db_url(), echo=False, future=True)
-engine = create_engine(
-    'postgresql+psycopg2://',
-    connect_args={
-        'host': 'localhost',
-        'port': 5432,
-        'user': 'postgres',
-        'password': 'admin',
-        'database': 'vkinder_db'
-    }
-)
+engine = create_engine(build_db_url(), echo=False, future=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False, future=True)
 
 def get_session():
