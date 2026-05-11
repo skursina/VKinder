@@ -1,6 +1,8 @@
 from models.user import User
 from models.candidate import Candidate
 from models.search_params import SearchParams
+from api.client import VKClient
+
 
 class VKUserAPI:
     def __init__(self, client: VKClient):

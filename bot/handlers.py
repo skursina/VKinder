@@ -30,7 +30,13 @@ class MessageHandler:
             "Привет! Я VKinder, Нажми «Найти пару», чтобы начать поиск!",
             KeyboardFactory.main_menu(),
         )
-    
+
+    def handle_search(self, user_id: int) -> None:
+        candidate, photos = self.search_service.find_candidate_for_user(user_id)
+        text = f"{candidate.first_name} {candidate.last_name}\n{candidate.profile_url}"
+        attachments = self.photo_service.build_attachments(photos)
+        self.message_api.send_message(user_id, text, KeyboardFactory.candidate_menu(), attachments)
+
     def handle_help(self, user_id: int) -> None:
         self.message_api.send_message(
             user_id,

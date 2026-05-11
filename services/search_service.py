@@ -25,3 +25,6 @@ class SearchService:
         self.blacklist_repository = blacklist_repository
         self.view_history_repository = view_history_repository
         self.user_repository = user_repository
+
+    def find_candidate_for_user(self, user_vk_id: int) -> tuple:
+        pass
